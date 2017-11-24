@@ -15,6 +15,7 @@ public class GameRoundManagerController : MonoBehaviour
     public MovementControlType player1Movement = MovementControlType.Letters;
     public DropBombControlType player1DropType = DropBombControlType.SpaceBar;
     public GameObject player1Bomb;
+    public ParticleSystem player1Particles;
 
     private PlayerTags player2Tag = PlayerTags.Player2;
     public string player2Name;
@@ -23,6 +24,7 @@ public class GameRoundManagerController : MonoBehaviour
     public MovementControlType player2Movement = MovementControlType.Arrows;
     public DropBombControlType player2DropType = DropBombControlType.ReturnKey;
     public GameObject player2Bomb;
+    public ParticleSystem player2Particles;
 
     private int player1Score = 0;
     private int player2Score = 0;
@@ -76,8 +78,8 @@ public class GameRoundManagerController : MonoBehaviour
     {
         CleanUpArena();
 
-        player1 = SpawnPlayer(player1Name, player1Tag, player1Spawn, player1Material, player1Movement, player1DropType, player1Bomb);
-        player2 = SpawnPlayer(player2Name, player2Tag, player2Spawn, player2Material, player2Movement, player2DropType, player2Bomb);
+        player1 = SpawnPlayer(player1Name, player1Tag, player1Spawn, player1Material, player1Movement, player1DropType, player1Bomb, player1Particles);
+        player2 = SpawnPlayer(player2Name, player2Tag, player2Spawn, player2Material, player2Movement, player2DropType, player2Bomb, player2Particles);
 
         player1Score = player2Score = 0;
 
@@ -93,7 +95,7 @@ public class GameRoundManagerController : MonoBehaviour
         isGameOver = false;
     }
 
-    private GameObject SpawnPlayer(string playerName, PlayerTags playerTag, GameObject playerSpawn, Material playerMaterial, MovementControlType playerMovement, DropBombControlType playerDropType, GameObject playerBomb)
+    private GameObject SpawnPlayer(string playerName, PlayerTags playerTag, GameObject playerSpawn, Material playerMaterial, MovementControlType playerMovement, DropBombControlType playerDropType, GameObject playerBomb, ParticleSystem playerParticles)
     {
         GameObject player = Instantiate(playerClass, playerSpawn.gameObject.transform.position, playerSpawn.gameObject.transform.rotation);
 
@@ -103,6 +105,7 @@ public class GameRoundManagerController : MonoBehaviour
         player.gameObject.GetComponent<PlayerController>().dropBombControlType = playerDropType;
         player.gameObject.GetComponent<PlayerController>().bombClass = playerBomb;
         player.gameObject.GetComponent<Renderer>().material.color = playerMaterial.color;
+        player.gameObject.GetComponent<PlayerController>().particleSystem = playerParticles;
 
         player.gameObject.GetComponent<PlayerController>().SetLightAfterMaterial();
 
@@ -165,13 +168,13 @@ public class GameRoundManagerController : MonoBehaviour
     private void SpawnPlayer1()
     {
         if (! player1 && timer > playerSpawnDelay)
-            player1 = SpawnPlayer(player1Name, player1Tag, player1Spawn, player1Material, player1Movement, player1DropType, player1Bomb);
+            player1 = SpawnPlayer(player1Name, player1Tag, player1Spawn, player1Material, player1Movement, player1DropType, player1Bomb, player1Particles);
     }
 
     private void SpawnPlayer2()
     {
         if (! player2 && timer > playerSpawnDelay)
-            player2 = SpawnPlayer(player2Name, player2Tag, player2Spawn, player2Material, player2Movement, player2DropType, player2Bomb);
+            player2 = SpawnPlayer(player2Name, player2Tag, player2Spawn, player2Material, player2Movement, player2DropType, player2Bomb, player2Particles);
     }
 
     public IEnumerator SlowMotionEffect()

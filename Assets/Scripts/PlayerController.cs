@@ -28,19 +28,33 @@ public class PlayerController : MonoBehaviour
 	public DropBombControlType dropBombControlType = DropBombControlType.SpaceBar;
     public GameObject bombClass;
     public GameObject deathEffect;
+    new public ParticleSystem particleSystem;
+
+    private Vector3 veloc;
+    private ParticleSystem myParticles;
 
     [HideInInspector]
     public bool isDead = false;
+    [HideInInspector]
     public int extraBombRange = 0;
-    	
-	// Update is called once per frame
-	void Update ()
+
+    private void Start()
+    {
+        veloc = new Vector3();
+
+        myParticles = Instantiate(particleSystem, gameObject.transform.position, gameObject.transform.rotation, this.gameObject.transform);
+    }
+
+    // Update is called once per frame
+    void Update ()
 	{
 		if (
 			(Input.GetKeyDown(KeyCode.Space) && dropBombControlType == DropBombControlType.SpaceBar) ||
 			(Input.GetKeyDown(KeyCode.Return) && dropBombControlType == DropBombControlType.ReturnKey)
 		   )
 			DropBomb ();
+
+        //myParticles.transform.position = gameObject.transform.position;
 	}
 
 	void FixedUpdate()
@@ -50,16 +64,20 @@ public class PlayerController : MonoBehaviour
 
 		if (movementControlType == MovementControlType.Letters)
 		{
-			horiz = Input.GetAxis ("HorizAxis Letter") * Time.deltaTime * walkSpeed;
-			vert = Input.GetAxis ("VertAxis Letter") * Time.deltaTime * walkSpeed;
+			horiz = Input.GetAxis ("HorizAxis Letter") * Time.fixedDeltaTime * walkSpeed;
+			vert = Input.GetAxis ("VertAxis Letter") * Time.fixedDeltaTime * walkSpeed;
 		}
 		else
 		{
-			horiz = Input.GetAxis ("HorizAxis Arrow") * Time.deltaTime * walkSpeed;
-			vert = Input.GetAxis ("VertAxis Arrow") * Time.deltaTime * walkSpeed;
+			horiz = Input.GetAxis ("HorizAxis Arrow") * Time.fixedDeltaTime * walkSpeed;
+			vert = Input.GetAxis ("VertAxis Arrow") * Time.fixedDeltaTime * walkSpeed;
 		}
-        
-		transform.Translate(-1 * vert, 0, horiz);
+
+        veloc.x = -1 * vert;
+        veloc.z = horiz;
+
+        GetComponent<Rigidbody>().velocity = veloc * 20f;
+        //transform.Translate(-1 * vert, 0, horiz);
 	}
 
     void OnDestroy()
