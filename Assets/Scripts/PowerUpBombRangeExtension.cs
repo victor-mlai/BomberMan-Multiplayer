@@ -6,6 +6,8 @@ public class PowerUpBombRangeExtension : PowerUpInterface
 {
     protected override void OnPickUp(PlayerController playerController)
     {
+        base.OnPickUp(playerController);
+
         playerController.extraBombRange += 1;
     }
 }

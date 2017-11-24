@@ -18,7 +18,7 @@ public abstract class PowerUpInterface : MonoBehaviour
 
     protected virtual void OnPickUp(PlayerController playerController)
     {
-        
+        Destroy(gameObject, 0.01f);
     }
 
     void Start()
