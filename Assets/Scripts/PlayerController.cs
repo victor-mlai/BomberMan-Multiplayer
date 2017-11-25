@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
 			vert = Input.GetAxis ("VertAxis Arrow") * Time.fixedDeltaTime * walkSpeed;
 		}
 
-        veloc.x = -1 * vert;
+        veloc.x = -1f * vert;
         veloc.z = horiz;
 
         GetComponent<Rigidbody>().velocity = veloc * 20f;
@@ -95,6 +95,7 @@ public class PlayerController : MonoBehaviour
             capsuleCollider.height / 2,
             Mathf.RoundToInt(gameObject.transform.position.z)
             );
+
 
         GameObject newBomb = Instantiate(bombClass, position , Quaternion.identity);
         newBomb.GetComponent<BombController>().explosionRadius += extraBombRange;

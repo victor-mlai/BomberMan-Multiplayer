@@ -51,16 +51,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 460f547ffcd97a34faa89d835477cb72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameRoundTimer: 60
+  playerSpawnDelay: 3
   playerClass: {fileID: 0}
+  player1Name: 
   player1Spawn: {fileID: 0}
   player1Material: {fileID: 2100000, guid: 44555e58daa41e24a83844c34cce4226, type: 2}
   player1Movement: 0
   player1DropType: 0
   player1Bomb: {fileID: 1910740020489214, guid: d8cd1be5e0eebfc46b5cbfad855d5f92,
     type: 2}
+  player1Particles: {fileID: 198942942177094000, guid: 8e07061bb21b77448a4b15bb6052e5d4,
+    type: 2}
+  player2Name: 
   player2Spawn: {fileID: 0}
   player2Material: {fileID: 2100000, guid: f129a054435512445bb6f62880d0fd3f, type: 2}
   player2Movement: 1
   player2DropType: 1
   player2Bomb: {fileID: 1910740020489214, guid: d8cd1be5e0eebfc46b5cbfad855d5f92,
+    type: 2}
+  player2Particles: {fileID: 198942942177094000, guid: 8e07061bb21b77448a4b15bb6052e5d4,
     type: 2}

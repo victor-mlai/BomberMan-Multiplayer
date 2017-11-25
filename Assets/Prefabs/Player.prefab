@@ -100,7 +100,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!108 &108787766113560160
 Light:
   m_ObjectHideFlags: 1
@@ -155,7 +155,10 @@ MonoBehaviour:
   bombClass: {fileID: 1910740020489214, guid: d8cd1be5e0eebfc46b5cbfad855d5f92, type: 2}
   deathEffect: {fileID: 1000011128802252, guid: 96730f8640590934eacb6f860058e7f9,
     type: 2}
+  particleSystem: {fileID: 198942942177094000, guid: 8e07061bb21b77448a4b15bb6052e5d4,
+    type: 2}
   isDead: 0
+  extraBombRange: 0
 --- !u!136 &136488453691994748
 CapsuleCollider:
   m_ObjectHideFlags: 1
