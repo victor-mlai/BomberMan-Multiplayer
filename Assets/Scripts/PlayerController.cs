@@ -29,8 +29,7 @@ public class PlayerController : MonoBehaviour
     public GameObject bombClass;
     public GameObject deathEffect;
     new public ParticleSystem particleSystem;
-
-    private Vector3 veloc;
+    
     private ParticleSystem myParticles;
 
     [HideInInspector]
@@ -40,8 +39,6 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        veloc = new Vector3();
-
         myParticles = Instantiate(particleSystem, gameObject.transform.position, gameObject.transform.rotation, this.gameObject.transform);
     }
 
@@ -72,12 +69,8 @@ public class PlayerController : MonoBehaviour
 			horiz = Input.GetAxis ("HorizAxis Arrow") * Time.fixedDeltaTime * walkSpeed;
 			vert = Input.GetAxis ("VertAxis Arrow") * Time.fixedDeltaTime * walkSpeed;
 		}
-
-        veloc.x = -1f * vert;
-        veloc.z = horiz;
-
-        GetComponent<Rigidbody>().velocity = veloc * 20f;
-        //transform.Translate(-1 * vert, 0, horiz);
+        
+        transform.Translate(-1 * vert, 0, horiz);
 	}
 
     void OnDestroy()
